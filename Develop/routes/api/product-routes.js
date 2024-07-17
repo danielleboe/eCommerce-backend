@@ -7,9 +7,9 @@ router.get('/', async (req, res) => {
     const products = await Product.findAll({
       include: [{ model: Category }, { model: Tag, through: ProductTag }],
     });
-    res.json(products);
+    res.status(200).json(products);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ message: 'Failed to retrieve products', error: err });
   }
 });
 
@@ -25,20 +25,20 @@ router.get('/:id', async (req, res) => {
       return;
     }
 
-    res.json(product);
+    res.status(200).json(product);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ message: 'Failed to retrieve product', error: err });
   }
 });
 
 // POST a new product
 router.post('/', async (req, res) => {
   try {
-    const newProduct = await Product.create(req.body);
+    const { tagIds, ...productData } = req.body;
+    const newProduct = await Product.create(productData);
 
-    // If tags are provided in the request body, create associations
-    if (req.body.tagIds && req.body.tagIds.length) {
-      const productTagIdArr = req.body.tagIds.map((tag_id) => {
+    if (tagIds && tagIds.length) {
+      const productTagIdArr = tagIds.map((tag_id) => {
         return {
           product_id: newProduct.id,
           tag_id,
@@ -47,30 +47,26 @@ router.post('/', async (req, res) => {
       await ProductTag.bulkCreate(productTagIdArr);
     }
 
-    res.status(200).json(newProduct);
+    res.status(201).json(newProduct);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).json({ message: 'Failed to create product', error: err });
   }
 });
 
 // PUT update a product by id
 router.put('/:id', async (req, res) => {
   try {
-    // Update the product
-    await Product.update(req.body, {
+    const { tagIds, ...productData } = req.body;
+    await Product.update(productData, {
       where: {
         id: req.params.id,
       },
     });
 
-    // Find all associated tags from ProductTag
     const productTags = await ProductTag.findAll({ where: { product_id: req.params.id } });
-
-    // Get list of current tag_ids
     const productTagIds = productTags.map(({ tag_id }) => tag_id);
 
-    // Create filtered list of new tag_ids
-    const newProductTags = req.body.tagIds
+    const newProductTags = (tagIds || [])
       .filter((tag_id) => !productTagIds.includes(tag_id))
       .map((tag_id) => {
         return {
@@ -79,20 +75,18 @@ router.put('/:id', async (req, res) => {
         };
       });
 
-    // Figure out which ones to remove
     const productTagsToRemove = productTags
-      .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
+      .filter(({ tag_id }) => !(tagIds || []).includes(tag_id))
       .map(({ id }) => id);
 
-    // Run both actions
     await Promise.all([
       ProductTag.destroy({ where: { id: productTagsToRemove } }),
       ProductTag.bulkCreate(newProductTags),
     ]);
 
-    res.json({ message: 'Product updated successfully' });
+    res.status(200).json({ message: 'Product updated successfully' });
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).json({ message: 'Failed to update product', error: err });
   }
 });
 
@@ -105,9 +99,9 @@ router.delete('/:id', async (req, res) => {
       },
     });
 
-    res.json({ message: 'Product deleted successfully' });
+    res.status(200).json({ message: 'Product deleted successfully' });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ message: 'Failed to delete product', error: err });
   }
 });
 
