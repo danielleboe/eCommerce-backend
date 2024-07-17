@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@sequelize/postgres": "^7.0.0-alpha.41",
-    "express": "^4.19.2",
-    "sequelize": "^6.37.3"
-  }
-}

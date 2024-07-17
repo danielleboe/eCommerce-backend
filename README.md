@@ -63,9 +63,17 @@ The things you need before installing the software.
 A step by step guide that will tell you how to get the development environment up and running.
 
 ```
-$ First step
-$ Another step
+$ Run npm i
+$ Start postgreSQL: brew services start postgresql@16
+$ Run npm i sequelize@7.0.4
 $ Final step
+
+"@sequelize/postgres": "^7.0.0-alpha.41",
+    "dotenv": "^8.6.0",
+    "express": "^4.19.2",
+    "pg": "^8.11.3",
+    "sequelize": "^5.22.5"
+
 ```
 
 ## Usage
