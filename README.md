@@ -18,17 +18,23 @@ I WANT a back end for my e-commerce website that uses the latest technologies
 SO THAT my company can compete with other e-commerce companies
 
 ### Acceptance Criteria
-GIVEN a functional Express.js API
-WHEN I add my database name, PostgreSQL username, and PostgreSQL password to an environment variable file
-THEN I am able to connect to a database using Sequelize
-WHEN I enter schema and seed commands
-THEN a development database is created and is seeded with test data
-WHEN I enter the command to invoke the application
-THEN my server is started and the Sequelize models are synced to the PostgreSQL database
-WHEN I open API GET routes in Insomnia Core for categories, products, or tags
-THEN the data for each of these routes is displayed in a formatted JSON
-WHEN I test API POST, PUT, and DELETE routes in Insomnia Core
-THEN I am able to successfully create, update, and delete data in my database
+* GIVEN a functional Express.js API
+* WHEN I add my database name, PostgreSQL username, and PostgreSQL password to an environment variable file
+* THEN I am able to connect to a database using Sequelize
+
+* WHEN I enter schema and seed commands
+* THEN a development database is created and is seeded with test data
+
+* WHEN I enter the command to invoke the application
+* THEN my server is started and the Sequelize models are synced to the PostgreSQL database
+
+* WHEN I open API GET routes in Insomnia Core for categories, products, or tags
+* THEN the data for each of these routes is displayed in a formatted JSON
+
+* WHEN I test API POST, PUT, and DELETE routes in Insomnia Core
+* THEN I am able to successfully create, update, and delete data in my database
+
+<br>
 
 This software uses the following open source packages:
 
@@ -38,25 +44,30 @@ This software uses the following open source packages:
 - [PostgreSQL](https://www.postgresql.org)
 
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+<!-- ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif) -->
 
 ### Demo Video & Screen Shots
-[![alt text](https://img.youtube.com/vi/video-id/0.jpg)](https://www.youtube.com/watch?v=video-id)
+#### GET ALL
+[![GET All video](./Develop/assets/GETallmage.png)](./Develop/assets/GET-All-Demo-Video.mp4)
 
+#### GET BY ID
+[![Get By Id video](./Develop/assets/getByIDImage.png)](./Develop/assets/GET-by-ID-Demo-Video.mp4)
 
+#### POST, PUT DELETE
+[![POST, PUT DELETE video](./Develop/assets/deleteImage.png)](./Develop/assets/PUT-POST-DELETE-Demo.mp4)
 
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+<!-- ### Prerequisites
 
 The things you need before installing the software.
 
-* You need this
+* 
 * And you need this
-* Oh, and don't forget this
+* Oh, and don't forget this -->
 
 ### Installation
 
