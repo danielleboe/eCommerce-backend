@@ -1,12 +1,8 @@
 # E-commerce Back End Starter Code
-
-# Project Title
-
-Backend 
+Application for back end database management and APIs
 
 ### Links
 [Repo](https://github.com/danielleboe/eCommerce-backend)
-[Web App]()
 
 
 ## Key Features
@@ -76,8 +72,17 @@ A step by step guide that will tell you how to get the development environment u
 ```
 $ Run npm i
 $ Start postgreSQL: brew services start postgresql@16
-$ Run npm i sequelize@7.0.4
-$ Final step
+$ Run node server.js
+
+#### Check Database and Table in pgAdmin
+$ psql -d postgres
+$ \i schema.sql
+$ Refresh and Navigate to the left bar to to verify that the database was created.
+
+#### View and Test API 
+$ Open API Platform
+$ Navigate to http://localhost:3001/api/  [insert specific endpoint name after api Ex: GET all categories is  http://localhost:3001/api/categories  ]
+$ Hit send for the json respons
 
 "@sequelize/postgres": "^7.0.0-alpha.41",
     "dotenv": "^8.6.0",
